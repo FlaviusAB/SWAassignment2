@@ -1,4 +1,4 @@
-import { outOfBoud } from "./helper"
+import { match2D, match2L, match2R, match2U, matchLR, matchUD, outOfBoud } from "./helper"
 
 export type Generator<T>= { next:() => T } 
 
@@ -70,7 +70,13 @@ export class Board<T> {
             //|| this.boardValues[first.row-1][first.col] === secondValue && this.boardValues[first.row-2][first.col] === secondValue||
             //this.boardValues[first.row][first.col+1] === secondValue && this.boardValues[first.row][first.col+2] === secondValue 
             //|| this.boardValues[first.row][first.col-1] === secondValue && this.boardValues[first.row][first.col-2] === secondValue)
-        if(){
+        if(matchLR(first, second, this.width, this.boardValues) || 
+            matchUD(first, second, this.height, this.boardValues) || 
+                match2D(first, second, this.height, this.boardValues) ||
+                    match2U(first, second, this.height, this.boardValues) ||
+                        match2R(first, second, this.width, this.boardValues) ||
+                            match2L(first, second, this.width, this.boardValues))
+        {
             return true;
         }
         return false;
