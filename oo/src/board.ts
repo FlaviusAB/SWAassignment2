@@ -52,10 +52,10 @@ export class Board<T> {
     }
 
     canMove(first: Position, second: Position): boolean {
-        let firstValue = this.boardValues[first.row][first.col];
-        let secondValue = this.boardValues[second.row][second.col];
-
-            //this.boardValues[second.row+1][second.col] === firstValue && this.boardValues[second.row-1][second.col] === firstValue || 
+        // let firstValue = this.boardValues[first.row][first.col];
+        // let secondValue = this.boardValues[second.row][second.col];
+        
+            //if(this.boardValues[second.row+1][second.col] === firstValue && this.boardValues[second.row-1][second.col] === firstValue || 
             //this.boardValues[second.row][second.col+1] === firstValue && this.boardValues[second.row][second.col-1] === firstValue 
             
             //|| this.boardValues[first.row+1][first.col] === secondValue && this.boardValues[first.row-1][first.col] === secondValue || 
@@ -70,12 +70,12 @@ export class Board<T> {
             //|| this.boardValues[first.row-1][first.col] === secondValue && this.boardValues[first.row-2][first.col] === secondValue||
             //this.boardValues[first.row][first.col+1] === secondValue && this.boardValues[first.row][first.col+2] === secondValue 
             //|| this.boardValues[first.row][first.col-1] === secondValue && this.boardValues[first.row][first.col-2] === secondValue)
-        if(matchLR(first, second, this.width, this.boardValues) || 
-            matchUD(first, second, this.height, this.boardValues) || 
-                match2D(first, second, this.height, this.boardValues) ||
-                    match2U(first, second, this.height, this.boardValues) ||
-                        match2R(first, second, this.width, this.boardValues) ||
-                            match2L(first, second, this.width, this.boardValues))
+        if(matchLR(first, second, this.width, this.height, this.boardValues) || 
+            matchUD(first, second, this.height, this.width, this.boardValues) || 
+                match2D(first, second, this.height, this.width, this.boardValues) ||
+                    match2U(first, second, this.height, this.width, this.boardValues) ||
+                        match2R(first, second, this.width, this.height, this.boardValues) ||
+                            match2L(first, second, this.width, this.height, this.boardValues))
         {
             return true;
         }
