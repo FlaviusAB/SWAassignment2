@@ -1,3 +1,5 @@
+import { outOfBoud } from "./helper"
+
 export type Generator<T>= { next:() => T } 
 
 export type Position = {
@@ -50,7 +52,28 @@ export class Board<T> {
     }
 
     canMove(first: Position, second: Position): boolean {
-        return false
+        let firstValue = this.boardValues[first.row][first.col];
+        let secondValue = this.boardValues[second.row][second.col];
+
+            //this.boardValues[second.row+1][second.col] === firstValue && this.boardValues[second.row-1][second.col] === firstValue || 
+            //this.boardValues[second.row][second.col+1] === firstValue && this.boardValues[second.row][second.col-1] === firstValue 
+            
+            //|| this.boardValues[first.row+1][first.col] === secondValue && this.boardValues[first.row-1][first.col] === secondValue || 
+            //this.boardValues[first.row][first.col+1] === secondValue && this.boardValues[first.row][first.col-1] === secondValue ||
+            //----------------------------------------------------------------
+            //this.boardValues[second.row+1][second.col] === firstValue && this.boardValues[second.row+2][second.col] === firstValue 
+            //|| this.boardValues[second.row-1][second.col] === firstValue && this.boardValues[second.row-2][second.col] === firstValue||
+            //this.boardValues[second.row][second.col+1] === firstValue && this.boardValues[second.row][second.col+2] === firstValue 
+            //|| this.boardValues[second.row][second.col-1] === firstValue && this.boardValues[second.row][second.col-2] === firstValue||
+ 
+            //this.boardValues[first.row+1][first.col] === secondValue && this.boardValues[first.row+2][first.col] === secondValue 
+            //|| this.boardValues[first.row-1][first.col] === secondValue && this.boardValues[first.row-2][first.col] === secondValue||
+            //this.boardValues[first.row][first.col+1] === secondValue && this.boardValues[first.row][first.col+2] === secondValue 
+            //|| this.boardValues[first.row][first.col-1] === secondValue && this.boardValues[first.row][first.col-2] === secondValue)
+        if(){
+            return true;
+        }
+        return false;
     }
     
     move(first: Position, second: Position) {
