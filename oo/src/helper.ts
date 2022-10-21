@@ -6,9 +6,6 @@ export function matchLR(first: Position, second: Position, width: number, height
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
         let secondV = board[second.row][second.col];
-        console.log("matchLR METHOD")
-        console.log("first row: " + first.row + " first col: " + first.col + " value: " + firstV)
-        console.log("second row: " + second.row + " second col: " + second.col + " value: " + secondV)
         if (diagonalMove(first, second)) {
             if (second.col + 1 < width && second.col + 1 >= 0 && second.col - 1 < width && second.col - 1 >= 0) {
                 if (board[second.row][second.col + 1] === firstV && board[second.row][second.col - 1] === firstV) {
@@ -31,9 +28,6 @@ export function matchUD(first: Position, second: Position, height: number, width
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
         let secondV = board[second.row][second.col];
-        console.log("matchUD METHOD")
-        console.log("first row: " + first.row + " first col: " + first.col + " value: " + firstV)
-        console.log("second row: " + second.row + " second col: " + second.col + " value: " + secondV)
         if (diagonalMove(first, second)) {
             if (second.row + 1 < height && second.row + 1 >= 0 && second.row - 1 < height && second.row - 1 >= 0) {
                 if (board[second.row][second.col + 1] === firstV && board[second.row][second.col - 1] === firstV) {
@@ -56,9 +50,6 @@ export function match2D(first: Position, second: Position, height: number, width
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
         let secondV = board[second.row][second.col];
-        console.log("match2D METHOD")
-        console.log("first row: " + first.row + " first col: " + first.col + " value: " + firstV)
-        console.log("second row: " + second.row + " second col: " + second.col + " value: " + secondV)
         if (diagonalMove(first, second)) {
             if (second.row + 2 < height && second.row + 2 >= 0) {
                 if (board[second.row + 1][second.col] === firstV && board[second.row + 2][second.col] === firstV) {
@@ -80,9 +71,6 @@ export function match2U(first: Position, second: Position, height: number, width
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
         let secondV = board[second.row][second.col];
-        console.log("match2U METHOD")
-        console.log("first row: " + first.row + " first col: " + first.col + " value: " + firstV)
-        console.log("second row: " + second.row + " second col: " + second.col + " value: " + secondV)
         if (diagonalMove(first, second)) {
             if (second.row - 2 < height && second.row - 2 >= 0) {
                 if (board[second.row - 1][second.col] === firstV && board[second.row - 2][second.col] === firstV) {
@@ -104,9 +92,6 @@ export function match2R(first: Position, second: Position, width: number, height
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
         let secondV = board[second.row][second.col];
-        console.log("match2R METHOD")
-        console.log("first row: " + first.row + " first col: " + first.col + " value: " + firstV)
-        console.log("second row: " + second.row + " second col: " + second.col + " value: " + secondV)
         if (diagonalMove(first, second)) {
             if (second.col + 2 < width && second.col + 2 >= 0) {
                 if (board[second.row][second.col + 1] === firstV && board[second.row][second.col + 2] === firstV) {
@@ -128,9 +113,6 @@ export function match2L(first: Position, second: Position, width: number, height
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
         let secondV = board[second.row][second.col];
-        console.log("match2L METHOD")
-        console.log("first row: " + first.row + " first col: " + first.col + " value: " + firstV)
-        console.log("second row: " + second.row + " second col: " + second.col + " value: " + secondV)
         if (diagonalMove(first, second)) {
             if (second.col - 2 < width && second.col - 2 >= 0) {
                 if (board[second.row][second.col - 1] === firstV && board[second.row][second.col - 2] === firstV) {
