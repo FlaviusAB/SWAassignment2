@@ -150,7 +150,7 @@ describe("Board", () => {
                 board = new Board(generator, 5, 4)
                 board.addListener(e => events.push(e))
             })
-
+            
             it("moves the pieces during a move", () => {
                 generator.prepare('C', 'D', 'A')
                 board.move({row: 2, col: 1}, {row: 0, col: 1})

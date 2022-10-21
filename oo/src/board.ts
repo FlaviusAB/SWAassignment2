@@ -12,7 +12,10 @@ export type Match<T> = {
     positions: Position[]
 }
 
-export type BoardEvent<T> = null;
+export type BoardEvent<T> = {
+    kind:string,
+    match:Match<T>
+};
 
 export type BoardListener<T> = null;
 
@@ -63,11 +66,14 @@ export class Board<T> {
 
     move(first: Position, second: Position) {
         if(this.canMove(first, second)){
+
+    
             let firstValue = this.boardValues[first.row][first.col];
             let secondValue = this.boardValues[second.row][second.col];
-            
             this.boardValues[first.row][first.col] = secondValue;
             this.boardValues[second.row][second.col] = firstValue;
+
+
         }
     }
 }
