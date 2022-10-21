@@ -1,4 +1,4 @@
-import { match2D, match2L, match2R, match2U, matchLR, matchUD} from "./helper"
+import { match2D, match2L, match2R, match2U, matchLR, matchThree, matchUD} from "./helper"
 
 export type Generator<T> = { next: () => T }
 
@@ -67,7 +67,7 @@ export class Board<T> {
     move(first: Position, second: Position) {
         if(this.canMove(first, second)){
 
-    
+            //console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "+matchThree)
             let firstValue = this.boardValues[first.row][first.col];
             let secondValue = this.boardValues[second.row][second.col];
             this.boardValues[first.row][first.col] = secondValue;

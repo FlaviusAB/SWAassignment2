@@ -1,8 +1,10 @@
 import { Position , Match} from "./board";
 
-const matchThree= {} as Match<any>;
+export let matchThree:Match<any>= {
+    matched:"",
+    positions:[]
+}
 export function matchLR(first: Position, second: Position, width: number, height: number, board: any): boolean {
-
     if (first.row < height && first.row >= 0 && first.col < width && first.col >= 0 &&
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
@@ -14,7 +16,9 @@ export function matchLR(first: Position, second: Position, width: number, height
                     matchThree.positions?.push({row:second.row,col:second.col-1});
                     matchThree.positions?.push({row:second.row,col:second.col});
                     matchThree.positions?.push({row:second.row,col:second.col+1});
-                    console.log(matchThree);
+                
+                    console.log("insiiiiiiiiide: "+matchThree.matched);
+                    console.log("position: "+matchThree.positions[7].col);
                     return true;
                 }
             }
