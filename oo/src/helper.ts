@@ -1,10 +1,7 @@
 import { Position , Match} from "./board";
 
-export let matchThree:Match<any>= {
-    matched:"",
-    positions:[]
-}
 export function matchLR(first: Position, second: Position, width: number, height: number, board: any): boolean {
+    const matchThree= {} as Match<any>;
     if (first.row < height && first.row >= 0 && first.col < width && first.col >= 0 &&
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
@@ -35,6 +32,7 @@ export function matchLR(first: Position, second: Position, width: number, height
 }
 
 export function matchUD(first: Position, second: Position, height: number, width: number, board: any): boolean {
+    const matchThree= {} as Match<any>;
     if (first.row < height && first.row >= 0 && first.col < width && first.col >= 0 &&
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
@@ -65,6 +63,7 @@ export function matchUD(first: Position, second: Position, height: number, width
 }
 
 export function match2D(first: Position, second: Position, height: number, width: number, board: any): boolean {
+    const matchThree= {} as Match<any>;
     if (first.row < height && first.row >= 0 && first.col < width && first.col >= 0 &&
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
@@ -94,6 +93,7 @@ export function match2D(first: Position, second: Position, height: number, width
 }
 
 export function match2U(first: Position, second: Position, height: number, width: number, board: any): boolean {
+    const matchThree= {} as Match<any>;
     if (first.row < height && first.row >= 0 && first.col < width && first.col >= 0 &&
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
@@ -123,6 +123,7 @@ export function match2U(first: Position, second: Position, height: number, width
 }
 
 export function match2R(first: Position, second: Position, width: number, height: number, board: any): boolean {
+    const matchThree= {} as Match<any>;
     if (first.row < height && first.row >= 0 && first.col < width && first.col >= 0 &&
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
@@ -152,6 +153,7 @@ export function match2R(first: Position, second: Position, width: number, height
 }
 
 export function match2L(first: Position, second: Position, width: number, height: number, board: any): boolean {
+    const matchThree= {} as Match<any>;
     if (first.row < height && first.row >= 0 && first.col < width && first.col >= 0 &&
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
         let firstV = board[first.row][first.col];
@@ -186,3 +188,4 @@ export function diagonalMove(first: Position, second: Position) {
     }
     return false;
 }
+
