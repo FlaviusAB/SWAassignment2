@@ -16,9 +16,6 @@ export function matchLR(first: Position, second: Position, width: number, height
                     matchThree.positions?.push({row:second.row,col:second.col-1});
                     matchThree.positions?.push({row:second.row,col:second.col});
                     matchThree.positions?.push({row:second.row,col:second.col+1});
-                
-                    console.log("insiiiiiiiiide: "+matchThree.matched);
-                    console.log("position: "+matchThree.positions[7].col);
                     return true;
                 }
             }
