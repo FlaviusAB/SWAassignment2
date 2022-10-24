@@ -104,7 +104,7 @@ export class Board<T> {
     move(first: Position, second: Position) {
 
         //21 passed with this.canMove(first, second)
-        //25 passed with this.canMove(second, first) -- might be fake passes
+        //25 passed with this.canMove(second, first) -- might be false positive
         if(this.canMove(second, first)){
             
             let eventObj:BoardEvent<any> = {kind:'Match', match:this.matches};
