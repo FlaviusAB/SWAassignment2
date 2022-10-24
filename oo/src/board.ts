@@ -1,5 +1,4 @@
-import { match2D, match2L, match2R, match2U, matchLR, matchUD } from "./helper"
-
+import { match2D, match2L, match2R, match2U, matchLR, matchThree, matchUD} from "./helper"
 
 export type Generator<T> = { next: () => T }
 
@@ -14,19 +13,20 @@ export type Match<T> = {
 }
 
 export type BoardEvent<T> = {
-    kind: string,
-    match: Match<T>
+    kind:'Match',
+    match:Match<T>
+} | 
+{ 
+    kind: 'Refill' 
 };
 
-export type BoardListener<T> = (e: BoardEvent<T>) => void;
+export type BoardListener<T> = null;
 
 export class Board<T> {
     generator: Generator<T>
     width: number
     height: number
     boardValues: any[] = []
-    listenersArray: ((e: BoardEvent<T>) => void)[] = []
-    matches: any[]
 
     constructor(generator: Generator<T>, width: number, height: number) {
         this.generator = generator
@@ -44,13 +44,7 @@ export class Board<T> {
     }
 
     addListener(listener: BoardListener<T>) {
-        this.listenersArray.push(listener)
-    }
-
-    next(e: BoardEvent<T>) {
-        this.listenersArray.forEach(element => {
-            element(e);
-        });
+        
     }
 
     piece(p: Position): T | undefined {
@@ -61,35 +55,27 @@ export class Board<T> {
     }
 
     canMove(first: Position, second: Position): boolean {
-        let canMove = false
-        this.matches = []
-        this.matches.push(matchLR(first, second, this.width, this.height, this.boardValues))
-        this.matches.push(matchUD(first, second, this.height, this.width, this.boardValues))
-        this.matches.push(match2D(first, second, this.height, this.width, this.boardValues))
-        this.matches.push(match2U(first, second, this.height, this.width, this.boardValues))
-        this.matches.push(match2R(first, second, this.height, this.width, this.boardValues))
-        this.matches.push(match2L(first, second, this.height, this.width, this.boardValues))
-
-        this.matches.map(match => {
-            if(match)
-                {
-                    //this.move(first,second)
-                    //refil(match.positions)
-                    canMove=true
-                }
-        })
-        return canMove
+        if (matchLR(first, second, this.width, this.height, this.boardValues) ||
+            matchUD(first, second, this.height, this.width, this.boardValues) ||
+            match2D(first, second, this.height, this.width, this.boardValues) ||
+            match2U(first, second, this.height, this.width, this.boardValues) ||
+            match2R(first, second, this.width, this.height, this.boardValues) ||
+            match2L(first, second, this.width, this.height, this.boardValues)) {
+            return true;
+        }
+        return false;
     }
 
     move(first: Position, second: Position) {
         if(this.canMove(first, second)){
+
+            //console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "+matchThree)
             let firstValue = this.boardValues[first.row][first.col];
             let secondValue = this.boardValues[second.row][second.col];
             this.boardValues[first.row][first.col] = secondValue;
             this.boardValues[second.row][second.col] = firstValue;
 
-            
-        }
 
+        }
     }
 }
