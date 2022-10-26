@@ -51,12 +51,6 @@ export class Board<T> {
         this.listenersArray.push(listener)
     }
 
-    // next(e: BoardEvent<T>) {
-    //     this.listenersArray.forEach(element => {
-    //         element(e);
-    //     });
-    // }
-
     piece(p: Position): T | undefined {
         if (this.boardValues[p.row] === undefined)
             return undefined
@@ -66,31 +60,30 @@ export class Board<T> {
 
     canMove(first: Position, second: Position): boolean {
         //let canMove = false
-        this.matches = undefined;
+        
         let arr:Match<T> = findMatches(first, second, this.width, this.height, this.boardValues)
+       
         
-            console.log("loggglogggg............... = "+arr.matched);
-        
-        this.matches = matchLR(first, second, this.width, this.height, this.boardValues);
-        if(this.matches === undefined){
-            this.matches = matchUD(first, second, this.height, this.width, this.boardValues);
-            if(this.matches === undefined){
-                this.matches = match2D(first, second, this.height, this.width, this.boardValues);
-                if(this.matches === undefined){
-                    this.matches = match2U(first, second, this.height, this.width, this.boardValues);
-                    if(this.matches === undefined){
-                        this.matches = match2R(first, second, this.height, this.width, this.boardValues);
-                        if(this.matches === undefined){
-                            this.matches = match2L(first, second, this.height, this.width, this.boardValues);
-                            if(this.matches === undefined){
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }    
-        }
-        return true;
+        // this.matches = matchLR(first, second, this.width, this.height, this.boardValues);
+        // if(this.matches === undefined){
+        //     this.matches = matchUD(first, second, this.height, this.width, this.boardValues);
+        //     if(this.matches === undefined){
+        //         this.matches = match2D(first, second, this.height, this.width, this.boardValues);
+        //         if(this.matches === undefined){
+        //             this.matches = match2U(first, second, this.height, this.width, this.boardValues);
+        //             if(this.matches === undefined){
+        //                 this.matches = match2R(first, second, this.height, this.width, this.boardValues);
+        //                 if(this.matches === undefined){
+        //                     this.matches = match2L(first, second, this.height, this.width, this.boardValues);
+        //                     if(this.matches === undefined){
+        //                         return false;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }    
+        // }
+         return true;
         
     }
 
@@ -98,27 +91,26 @@ export class Board<T> {
 
         //21 passed with this.canMove(first, second)
         //25 passed with this.canMove(second, first) -- might be false positive
-        if(this.canMove(first, second)){
-
-            console.log("hhhhhhhhhhhhhh "+this.matches.matched)
-            
-            let eventObj:BoardEvent<any> = {kind:'Match', match:this.matches};
-            this.listenersArray.forEach(e => e(eventObj))
-
-            if(this.canMove(second, first)){
-                console.log("hhhhhhhhhhhhhh "+this.matches.matched)
-
-                eventObj = {kind:'Match', match:this.matches};
-                this.listenersArray.forEach(e => e(eventObj))
-            }
-
-            let firstValue = this.boardValues[first.row][first.col];
-            let secondValue = this.boardValues[second.row][second.col];
-            this.boardValues[first.row][first.col] = secondValue;
-            this.boardValues[second.row][second.col] = firstValue;
+        // if(this.canMove(first, second)){
 
             
-        }
+            
+        //     let eventObj:BoardEvent<any> = {kind:'Match', match:this.matches};
+        //     this.listenersArray.forEach(e => e(eventObj))
+
+        //     if(this.canMove(second, first)){
+
+        //         eventObj = {kind:'Match', match:this.matches};
+        //         this.listenersArray.forEach(e => e(eventObj))
+        //     }
+
+        //     let firstValue = this.boardValues[first.row][first.col];
+        //     let secondValue = this.boardValues[second.row][second.col];
+        //     this.boardValues[first.row][first.col] = secondValue;
+        //     this.boardValues[second.row][second.col] = firstValue;
+
+            
+        // }
         
         
         
