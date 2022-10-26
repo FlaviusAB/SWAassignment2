@@ -1,4 +1,4 @@
-import { match2D, match2L, match2R, match2U, matchLR, matchUD} from "./helper"
+import { findMatches, match2D, match2L, match2R, match2U, matchLR, matchUD} from "./helper"
 
 export type Generator<T> = { next: () => T }
 
@@ -26,14 +26,16 @@ export class Board<T> {
     generator: Generator<T>
     width: number
     height: number
-    boardValues: any[] = []
-    listenersArray: BoardListener<T>[] = []
+    boardValues: any[] 
+    listenersArray: BoardListener<T>[] 
     matches: Match<T>
 
     constructor(generator: Generator<T>, width: number, height: number) {
         this.generator = generator
         this.width = width
         this.height = height
+        this.boardValues = []
+        this.listenersArray = []
 
         for (let i = 0; i < height; i++) {
             let row = []
@@ -65,7 +67,10 @@ export class Board<T> {
     canMove(first: Position, second: Position): boolean {
         //let canMove = false
         this.matches = undefined;
-
+        let arr:Match<T> = findMatches(first, second, this.width, this.height, this.boardValues)
+        
+            console.log("loggglogggg............... = "+arr.matched);
+        
         this.matches = matchLR(first, second, this.width, this.height, this.boardValues);
         if(this.matches === undefined){
             this.matches = matchUD(first, second, this.height, this.width, this.boardValues);
@@ -86,31 +91,23 @@ export class Board<T> {
             }    
         }
         return true;
-        // if(this.matches != undefined){
-        //     canMove = true;
-        // }
-
-        // this.matches.map(match => {
-        //     if(match)
-        //         {
-        //             //this.move(first,second)
-        //             //refil(match.positions)
-        //             canMove=true
-        //         }s
-        // })
-        //return canMove
+        
     }
 
     move(first: Position, second: Position) {
 
         //21 passed with this.canMove(first, second)
         //25 passed with this.canMove(second, first) -- might be false positive
-        if(this.canMove(second, first)){
+        if(this.canMove(first, second)){
+
+            console.log("hhhhhhhhhhhhhh "+this.matches.matched)
             
             let eventObj:BoardEvent<any> = {kind:'Match', match:this.matches};
             this.listenersArray.forEach(e => e(eventObj))
 
-            if(this.canMove(first, second)){
+            if(this.canMove(second, first)){
+                console.log("hhhhhhhhhhhhhh "+this.matches.matched)
+
                 eventObj = {kind:'Match', match:this.matches};
                 this.listenersArray.forEach(e => e(eventObj))
             }
@@ -119,6 +116,8 @@ export class Board<T> {
             let secondValue = this.boardValues[second.row][second.col];
             this.boardValues[first.row][first.col] = secondValue;
             this.boardValues[second.row][second.col] = firstValue;
+
+            
         }
         
         

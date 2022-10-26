@@ -177,6 +177,7 @@ describe("Board", () => {
                 expect(events.slice(0, 1)).toEqual([{kind: 'Match', match: {matched: 'C', positions: [{row: 0, col: 3}, {row: 1, col: 3}, {row: 2, col: 3}]}}])
             })
             it("fires multiple events on horz + vert matches", () => {
+                console.log(board)
                 generator.prepare('G', 'H', 'I')
                 generator.prepare('J', 'K', 'L')
                 generator.prepare('J', 'K', 'L')

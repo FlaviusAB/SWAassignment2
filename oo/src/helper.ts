@@ -15,7 +15,8 @@ export function matchLR(first: Position, second: Position, width: number, height
                     positions.push({row:second.row,col:second.col-1});
                     positions.push({row:second.row,col:second.col});
                     positions.push({row:second.row,col:second.col+1});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
                 if (first.col + 1 < width && first.col + 1 >= 0 && first.col - 1 < width && first.col - 1 >= 0) {
@@ -24,8 +25,10 @@ export function matchLR(first: Position, second: Position, width: number, height
                     positions.push({row:first.row,col:first.col-1});
                     positions.push({row:first.row,col:first.col});
                     positions.push({row:first.row,col:first.col+1});
-                    matchThree.positions = positions;
-                    return matchThree;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
+                                        return matchThree;
                 }
             }
             }
@@ -50,7 +53,9 @@ export function matchUD(first: Position, second: Position, height: number, width
                     positions.push({row:second.row-1,col:second.col});
                     positions.push({row:second.row,col:second.col});
                     positions.push({row:second.row+1,col:second.col});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
                 if (first.col + 1 < height && first.col + 1 >= 0 && first.col - 1 < height && first.col - 1 >= 0) {
@@ -59,7 +64,9 @@ export function matchUD(first: Position, second: Position, height: number, width
                     positions.push({row:first.row-1,col:first.col});
                     positions.push({row:first.row,col:first.col});
                     positions.push({row:first.row+1,col:first.col});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
             }
@@ -85,7 +92,9 @@ export function match2D(first: Position, second: Position, height: number, width
                     positions.push({row:second.row,col:second.col});
                     positions.push({row:second.row+1,col:second.col});
                     positions.push({row:second.row+2,col:second.col});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
                 if (first.row + 2 < height && first.row + 2 >= 0) {
@@ -94,7 +103,9 @@ export function match2D(first: Position, second: Position, height: number, width
                     positions.push({row:first.row,col:first.col});
                     positions.push({row:first.row+1,col:first.col});
                     positions.push({row:first.row+2,col:first.col});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
             }
@@ -119,7 +130,9 @@ export function match2U(first: Position, second: Position, height: number, width
                     positions.push({row:second.row-2,col:second.col});
                     positions.push({row:second.row-1,col:second.col});
                     positions.push({row:second.row,col:second.col});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
                 if (first.row - 2 < height && first.row - 2 >= 0) {
@@ -128,7 +141,9 @@ export function match2U(first: Position, second: Position, height: number, width
                     positions.push({row:first.row-2,col:first.col});
                     positions.push({row:first.row-1,col:first.col});
                     positions.push({row:first.row,col:first.col});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
             }
@@ -153,7 +168,9 @@ export function match2R(first: Position, second: Position, width: number, height
                     positions.push({row:second.row,col:second.col});
                     positions.push({row:second.row,col:second.col+1});
                     positions.push({row:second.row,col:second.col+2});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
                 if (first.col + 2 < width && first.col + 2 >= 0) {
@@ -162,7 +179,9 @@ export function match2R(first: Position, second: Position, width: number, height
                     positions.push({row:first.row,col:first.col});
                     positions.push({row:first.row,col:first.col+1});
                     positions.push({row:first.row,col:first.col+2});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
             }
@@ -187,7 +206,9 @@ export function match2L(first: Position, second: Position, width: number, height
                     positions.push({row:second.row,col:second.col-2});
                     positions.push({row:second.row,col:second.col-1});
                     positions.push({row:second.row,col:second.col});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
                 if (first.col - 2 < width && first.col - 2 >= 0) {
@@ -196,7 +217,9 @@ export function match2L(first: Position, second: Position, width: number, height
                     positions.push({row:first.row,col:first.col-2});
                     positions.push({row:first.row,col:first.col-1});
                     positions.push({row:first.row,col:first.col});
-                    matchThree.positions = positions;
+                    matchThree.positions = []
+
+                    positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
                     return matchThree;
                 }
             }
@@ -212,4 +235,32 @@ export function diagonalMove(first: Position, second: Position) {
         return true;
     }
     return false;
+}
+
+export function findMatches(first: Position, second: Position,width: number, height: number, board: any ):Match<any> | undefined {
+    const matchThree= {} as Match<any>;
+    const positions:Position[] = [];
+    if (first.row < height && first.row >= 0 && first.col < width && first.col >= 0 &&
+        second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
+            let firstValue = board[first.row][first.col];
+            let secondValue = board[second.row][second.col];
+            board[first.row][first.col] = secondValue;
+            board[second.row][second.col] = firstValue;
+            function searchForMatches(){
+                for(let i=0;i<height-2;i++){
+                    for(let j=0;j<width-2;j++){
+                        if(board[i][j]===board[i+1][j] && board[i+1][j]===board[i+2][j]){
+                            positions.push(board[i][j])
+                            positions.push(board[i+1][j])
+                            positions.push(board[i+2][j])
+                            matchThree.positions = []
+
+                            positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
+                            return matchThree;
+                        }
+                    }
+                }
+            }
+        }
+    return matchThree;
 }
