@@ -240,6 +240,7 @@ export function diagonalMove(first: Position, second: Position) {
 export function findMatches(first: Position, second: Position,width: number, height: number, board: any ):Match<any> | undefined {
     const matchThree= {} as Match<any>;
     const positions:Position[] = [];
+    matchThree.positions=[]
    
     if (first.row < height && first.row >= 0 && first.col < width && first.col >= 0 &&
         second.row < height && second.row >= 0 && second.col < width && second.col >= 0) {
@@ -256,17 +257,19 @@ export function findMatches(first: Position, second: Position,width: number, hei
                 console.log("i............... = "+i);
                 for(let j=0;j<width-2;j++){
                     console.log("j............... = "+j)
-                    console.log(i+" "j+" "+"board[i][j]............... = "+board[i][j])
-                    console.log("board[i+1][j].............. = "+board[i+1][j])
-                    console.log("board[i+2][j]............... = "+board[i+2][j])
-                    if(board[i][j]===board[i+1][j] && board[i+1][j]===board[i+2][j]){
+                    console.log(i+" "+j+" "+"board[i][j]............... = "+board[i][j])
+                    console.log(i+" "+(j+1)+" "+"board[i][j+1].............. = "+board[i][j+1])
+                    console.log(i+" "+(j+2)+" "+"board[i][j+2]............... = "+board[i][j+2])
+                    if(board[i][j]===board[i][j+1] && board[i][j+1]===board[i][j+2]){
                         positions.push({row:i,col:j})
-                        positions.push({row:i+1,col:j})
-                        positions.push({row:i+2,col:j})
-                        
-                        console.log("2............... = "+positions[0]+" "+positions[1]);
+                        positions.push({row:i,col:j+1})
+                        positions.push({row:i,col:j+2})
 
-                            positions.forEach(val => matchThree.positions.push(Object.assign({}, val)));
+                        positions.forEach(element => {
+                            console.log("2............... = "+element.row+" "+element.col);
+                        });
+                        
+                            matchThree.positions = Object.assign([],positions)
                             matchThree.matched=board[i][j]
                             return matchThree;
                         }
