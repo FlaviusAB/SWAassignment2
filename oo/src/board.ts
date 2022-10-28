@@ -28,6 +28,7 @@ export class Board<T> {
     height: number
     boardValues: any[] 
     listenersArray: BoardListener<T>[] 
+   
     
 
     constructor(generator: Generator<T>, width: number, height: number) {
@@ -36,6 +37,7 @@ export class Board<T> {
         this.height = height
         this.boardValues = []
         this.listenersArray = []
+        
 
         for (let i = 0; i < height; i++) {
             let row = []
@@ -59,18 +61,8 @@ export class Board<T> {
     }
 
     canMove(first: Position, second: Position): boolean {
-
-        
-        let matches:Match<T>[] = findMatches(first, second, this.width, this.height, this.boardValues)
-       
-        matches.forEach(element => {
-            element.positions.forEach(el =>{
-                console.log("possss............... [ "+el.row+","+el.col+"]")
-            })
-            
-        });
-       // console.log("possssMAtc............... = "+matches[0].matched+" doi.. "+matches[1].matched)
-
+        let matches:Match<T>[] = findMatches(first, second, this.width, this.height, this.boardValues)       
+   
         if(matches[0]===undefined)
             return false
         return true;
@@ -78,30 +70,30 @@ export class Board<T> {
     }
 
     move(first: Position, second: Position) {
+        let eventObj:BoardEvent<any> 
+        let matches:Match<T>[] = []
+        matches = findMatches(first, second, this.width, this.height, this.boardValues)
 
-        //21 passed with this.canMove(first, second)
-        //25 passed with this.canMove(second, first) -- might be false positive
-        // if(this.canMove(first, second)){
 
-            
-            
-        //     let eventObj:BoardEvent<any> = {kind:'Match', match:this.matches};
-        //     this.listenersArray.forEach(e => e(eventObj))
+        this.boardValues.forEach(v=>{
+            console.log(v)
+        })
 
-        //     if(this.canMove(second, first)){
-
-        //         eventObj = {kind:'Match', match:this.matches};
-        //         this.listenersArray.forEach(e => e(eventObj))
-        //     }
-
-        //     let firstValue = this.boardValues[first.row][first.col];
-        //     let secondValue = this.boardValues[second.row][second.col];
-        //     this.boardValues[first.row][first.col] = secondValue;
-        //     this.boardValues[second.row][second.col] = firstValue;
-
-            
-        // }
-        
+        if(matches[0]!==undefined){
+            matches.forEach(b =>{
+                console.log(".... "+b.matched)
+                console.log(".... "+b.positions)
+                b.positions.forEach(p=>{
+                    console.log("["+p.row+","+p.col+"]")
+                })
+                eventObj = {kind:'Match', match:b};
+                this.listenersArray.forEach(e => e(eventObj))
+            })
+            let firstValue = this.boardValues[first.row][first.col];
+            let secondValue = this.boardValues[second.row][second.col];
+            this.boardValues[first.row][first.col] = secondValue;
+            this.boardValues[second.row][second.col] = firstValue;      
+        }
         
         
     }
