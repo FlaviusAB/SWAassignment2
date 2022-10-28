@@ -90,49 +90,49 @@ describe("Board", () => {
                 it("recognizes vertical moves that moves first piece to a horizontal match as valid", () => {
                     expect(board.canMove({row: 2, col: 1}, {row: 0, col: 1})).toEqual(true)
                 })
-                // it("recognizes vertical moves that moves second piece to a horizontal match as valid", () => {
-                //     expect(board.canMove({row: 0, col: 1}, {row: 2, col: 1})).toEqual(true)
-                // })
-                // it("recognizes vertical moves that moves first piece to a vertical match as valid", () => {
-                //     expect(board.canMove({row: 3, col: 3}, {row: 2, col: 3})).toEqual(true)
-                // })
-                // it("recognizes vertical moves that moves second piece to a vertical match as valid", () => {
-                //     expect(board.canMove({row: 2, col: 3}, {row: 3, col: 3})).toEqual(true)
-                // })
+                it("recognizes vertical moves that moves second piece to a horizontal match as valid", () => {
+                    expect(board.canMove({row: 0, col: 1}, {row: 2, col: 1})).toEqual(true)
+                })
+                it("recognizes vertical moves that moves first piece to a vertical match as valid", () => {
+                    expect(board.canMove({row: 3, col: 3}, {row: 2, col: 3})).toEqual(true)
+                })
+                it("recognizes vertical moves that moves second piece to a vertical match as valid", () => {
+                    expect(board.canMove({row: 2, col: 3}, {row: 3, col: 3})).toEqual(true)
+                })
             })
 
-            // describe("valid horizontal moves", () => {
-            //     it("recognizes horizontal moves that moves first piece to a horizontal match as valid", () => {
-            //         expect(board.canMove({row: 3, col: 3}, {row: 3, col: 2})).toEqual(true)
-            //     })
-            //     it("recognizes horizontal moves that moves second piece to a horizontal match as valid", () => {
-            //         expect(board.canMove({row: 3, col: 2}, {row: 3, col: 3})).toEqual(true)
-            //     })
-            //     it("recognizes horizontal moves that moves first piece to a vertical match as valid", () => {
-            //         expect(board.canMove({row: 1, col: 0}, {row: 1, col: 2})).toEqual(true)
-            //     })
-            //     it("recognizes horizontal moves that moves second piece to a vertical match as valid", () => {
-            //         expect(board.canMove({row: 1, col: 2}, {row: 1, col: 0})).toEqual(true)
-            //     })
-            // })
+            describe("valid horizontal moves", () => {
+                it("recognizes horizontal moves that moves first piece to a horizontal match as valid", () => {
+                    expect(board.canMove({row: 3, col: 3}, {row: 3, col: 2})).toEqual(true)
+                })
+                it("recognizes horizontal moves that moves second piece to a horizontal match as valid", () => {
+                    expect(board.canMove({row: 3, col: 2}, {row: 3, col: 3})).toEqual(true)
+                })
+                it("recognizes horizontal moves that moves first piece to a vertical match as valid", () => {
+                    expect(board.canMove({row: 1, col: 0}, {row: 1, col: 2})).toEqual(true)
+                })
+                it("recognizes horizontal moves that moves second piece to a vertical match as valid", () => {
+                    expect(board.canMove({row: 1, col: 2}, {row: 1, col: 0})).toEqual(true)
+                })
+            })
 
-        //     describe("invalid moves", () => {
-        //         it("does not allow moves that make no matches", () => {
-        //             expect(board.canMove({row: 0, col: 0}, {row: 0, col: 0})).toEqual(false)
-        //         })
-        //         it("does not count the piece that is moved away", () => {
-        //             expect(board.canMove({row: 1, col: 1}, {row: 2, col: 1})).toEqual(false)
-        //         })
-        //         it("recognizes moves on different rows and columns as invalid", () => {
-        //             expect(board.canMove({row: 0, col: 3}, {row: 1, col: 2})).toEqual(false)
-        //         })
-        //         it("recognizes out-of-bounds moves as invalid", () =>{
-        //             expect(board.canMove({row: 3, col: 3}, {row: -1, col: 3})).toEqual(false)
-        //             expect(board.canMove({row: 3, col: 3}, {row: 3, col: -1})).toEqual(false)
-        //             expect(board.canMove({row: 2, col: 0}, {row: 2, col: 4})).toEqual(false)
-        //         })
-        //     })
-        // })
+            describe("invalid moves", () => {
+                it("does not allow moves that make no matches", () => {
+                    expect(board.canMove({row: 0, col: 0}, {row: 0, col: 0})).toEqual(false)
+                })
+                it("does not count the piece that is moved away", () => {
+                    expect(board.canMove({row: 1, col: 1}, {row: 2, col: 1})).toEqual(false)
+                })
+                it("recognizes moves on different rows and columns as invalid", () => {
+                    expect(board.canMove({row: 0, col: 3}, {row: 1, col: 2})).toEqual(false)
+                })
+                it("recognizes out-of-bounds moves as invalid", () =>{
+                    expect(board.canMove({row: 3, col: 3}, {row: -1, col: 3})).toEqual(false)
+                    expect(board.canMove({row: 3, col: 3}, {row: 3, col: -1})).toEqual(false)
+                    expect(board.canMove({row: 2, col: 0}, {row: 2, col: 4})).toEqual(false)
+                })
+            })
+        })
 
         // describe("making moves", () => {
         //     let events: BoardEvent<String>[]
@@ -351,6 +351,6 @@ describe("Board", () => {
         //             {kind: 'Refill'},
         //         ])
         //     })
-        })
+        // })
     })
 })

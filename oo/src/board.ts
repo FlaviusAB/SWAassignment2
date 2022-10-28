@@ -1,4 +1,4 @@
-import { findMatches, match2D, match2L, match2R, match2U, matchLR, matchUD} from "./helper"
+import { findMatches} from "./helper"
 
 export type Generator<T> = { next: () => T }
 
@@ -28,7 +28,7 @@ export class Board<T> {
     height: number
     boardValues: any[] 
     listenersArray: BoardListener<T>[] 
-    matches: Match<T>
+    
 
     constructor(generator: Generator<T>, width: number, height: number) {
         this.generator = generator
@@ -59,31 +59,21 @@ export class Board<T> {
     }
 
     canMove(first: Position, second: Position): boolean {
-        //let canMove = false
+
         
-        let arr:Match<T> = findMatches(first, second, this.width, this.height, this.boardValues)
+        let matches:Match<T>[] = findMatches(first, second, this.width, this.height, this.boardValues)
        
-        
-        // this.matches = matchLR(first, second, this.width, this.height, this.boardValues);
-        // if(this.matches === undefined){
-        //     this.matches = matchUD(first, second, this.height, this.width, this.boardValues);
-        //     if(this.matches === undefined){
-        //         this.matches = match2D(first, second, this.height, this.width, this.boardValues);
-        //         if(this.matches === undefined){
-        //             this.matches = match2U(first, second, this.height, this.width, this.boardValues);
-        //             if(this.matches === undefined){
-        //                 this.matches = match2R(first, second, this.height, this.width, this.boardValues);
-        //                 if(this.matches === undefined){
-        //                     this.matches = match2L(first, second, this.height, this.width, this.boardValues);
-        //                     if(this.matches === undefined){
-        //                         return false;
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }    
-        // }
-         return true;
+        matches.forEach(element => {
+            element.positions.forEach(el =>{
+                console.log("possss............... [ "+el.row+","+el.col+"]")
+            })
+            
+        });
+       // console.log("possssMAtc............... = "+matches[0].matched+" doi.. "+matches[1].matched)
+
+        if(matches[0]===undefined)
+            return false
+        return true;
         
     }
 
