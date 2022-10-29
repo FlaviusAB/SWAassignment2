@@ -191,8 +191,8 @@ describe("Board", () => {
                 generator.prepare('B', 'A', 'B')
                 board.move({row: 3, col: 2}, {row: 3, col: 0})
                 expect(events.slice(0, 2)).toEqual([
-                    {kind: 'Match', match: {matched: 'C', positions: [{row: 1, col: 2}, {row: 2, col: 2}, {row: 3, col: 2}]}},
                     {kind: 'Match', match: {matched: 'D', positions: [{row: 1, col: 0}, {row: 2, col: 0}, {row: 3, col: 0}]}},
+                    {kind: 'Match', match: {matched: 'C', positions: [{row: 1, col: 2}, {row: 2, col: 2}, {row: 3, col: 2}]}},
                 ])
             })
             it("doesn't swap on illegal moves", () => {
