@@ -1,4 +1,4 @@
-import { findMatches, replaceTiles} from "./helper"
+import { findMatchesWhenMoving, findMatchesRowAndColumn, replaceTiles} from "./helper"
 
 export type Generator<T> = { next: () => T }
 
@@ -61,7 +61,7 @@ export class Board<T> {
     }
 
     canMove(first: Position, second: Position): boolean {
-        let matches:Match<T>[] = findMatches(first, second, this.width, this.height, this.boardValues)       
+        let matches:Match<T>[] = findMatchesWhenMoving(first, second, this.width, this.height, this.boardValues)       
    
         if(matches[0]===undefined)
             return false
@@ -72,19 +72,21 @@ export class Board<T> {
     move(first: Position, second: Position) {
         let eventObj:BoardEvent<any> 
         let matches:Match<T>[] = []
-        matches = findMatches(first, second, this.width, this.height, this.boardValues)
+        matches = findMatchesWhenMoving(first, second, this.width, this.height, this.boardValues)
         let positionsForReplacing :Position[] = []
-        
+        let matchedPositionsAfterRefil :Position[] = []
 
-        
+        let replacedBoard = []
+        let replacedBoardAfter = []
+
         if(matches[0]!==undefined){
-            matches.forEach(b =>{
+            matches.forEach(matchedValues =>{
                
-                b.positions.forEach(p=>{
+                matchedValues.positions.forEach(p=>{
                         positionsForReplacing.push(p)
                     })
                     
-                    eventObj = {kind:'Match', match:b};
+                    eventObj = {kind:'Match', match:matchedValues};
                     this.listenersArray.forEach(e => e(eventObj))
                 })
                 let firstValue = this.boardValues[first.row][first.col];
@@ -92,13 +94,28 @@ export class Board<T> {
                 this.boardValues[first.row][first.col] = secondValue;
                 this.boardValues[second.row][second.col] = firstValue;     
 
-            let replacedBoard = replaceTiles(positionsForReplacing,this.width,this.height,this.boardValues,this.generator)
+            replacedBoard = replaceTiles(positionsForReplacing,this.width,this.height,this.boardValues,this.generator)
             eventObj = {kind:'Refill'};
             this.listenersArray.forEach(e => e(eventObj))
-            
-            
+
+            let matchesAfterRefil = findMatchesRowAndColumn(this.width,this.height,replacedBoard)
+            while(matchesAfterRefil[0]!==undefined){
+                matchesAfterRefil.forEach(matchedValues =>{
+               
+                    matchedValues.positions.forEach(p=>{
+                        matchedPositionsAfterRefil.push(p)
+                        })
+                        
+                        eventObj = {kind:'Match', match:matchedValues};
+                        this.listenersArray.forEach(e => e(eventObj))
+                    })
+                    replacedBoardAfter = replaceTiles(matchedPositionsAfterRefil,this.width,this.height,this.boardValues,this.generator)
+                    eventObj = {kind:'Refill'};
+                    this.listenersArray.forEach(e => e(eventObj))
+                    matchesAfterRefil = findMatchesRowAndColumn(this.width,this.height,replacedBoardAfter)
+            }
+                
         }
-        
         
     }
 }
