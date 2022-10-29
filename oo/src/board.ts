@@ -1,4 +1,4 @@
-import { findMatches} from "./helper"
+import { findMatches, replaceTiles} from "./helper"
 
 export type Generator<T> = { next: () => T }
 
@@ -73,26 +73,30 @@ export class Board<T> {
         let eventObj:BoardEvent<any> 
         let matches:Match<T>[] = []
         matches = findMatches(first, second, this.width, this.height, this.boardValues)
+        let positionsForReplacing :Position[] = []
+        
 
-
-        this.boardValues.forEach(v=>{
-            console.log(v)
-        })
-
+        
         if(matches[0]!==undefined){
             matches.forEach(b =>{
-                console.log(".... "+b.matched)
-                console.log(".... "+b.positions)
+               
                 b.positions.forEach(p=>{
-                    console.log("["+p.row+","+p.col+"]")
+                        positionsForReplacing.push(p)
+                    })
+                    
+                    eventObj = {kind:'Match', match:b};
+                    this.listenersArray.forEach(e => e(eventObj))
                 })
-                eventObj = {kind:'Match', match:b};
-                this.listenersArray.forEach(e => e(eventObj))
-            })
-            let firstValue = this.boardValues[first.row][first.col];
-            let secondValue = this.boardValues[second.row][second.col];
-            this.boardValues[first.row][first.col] = secondValue;
-            this.boardValues[second.row][second.col] = firstValue;      
+                let firstValue = this.boardValues[first.row][first.col];
+                let secondValue = this.boardValues[second.row][second.col];
+                this.boardValues[first.row][first.col] = secondValue;
+                this.boardValues[second.row][second.col] = firstValue;     
+
+            let replacedBoard = replaceTiles(positionsForReplacing,this.width,this.height,this.boardValues,this.generator)
+            eventObj = {kind:'Refill'};
+            this.listenersArray.forEach(e => e(eventObj))
+            
+            
         }
         
         

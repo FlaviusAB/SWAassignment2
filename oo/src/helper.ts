@@ -2,6 +2,7 @@ import {
     Position,
     Match
 } from "./board";
+export type Generator<T> = { next: () => T }
 
 export function isNotDiagonalMove(first: Position, second: Position) {
     if (first.row === second.row || first.col === second.col) {
@@ -82,4 +83,46 @@ export function findMatches(first: Position, second: Position, width: number, he
         board[second.row][second.col] = secondValue;
     }
     return allMatches;
+}
+
+export function replaceTiles(positions:Position[],width: number, height: number, board: any,generator:Generator<any>) : any[]{
+    positions.forEach(p=>{
+        board[p.row][p.col]=undefined
+    })
+    
+    // console.log("h:"+height)
+    // console.log("w:"+width)
+    let inc = height-1  
+    while(inc>=0)
+    {
+    for (let i = height-1; i >= 0; i--) {
+        for (let j = 0; j < width; j++) {
+            if(board[i][j]===undefined)
+            {
+                if(i===0)
+                {
+                    board[i][j]=generator.next()
+                }
+                else{
+                    if(board[i-1][j]!==undefined)
+                    {
+                    board[i][j]=board[i-1][j]
+                    board[i-1][j]=undefined
+                    }
+                }
+            }
+            // console.log("["+i+","+j+"]")
+            // console.log(board[i][j])
+
+        }
+    }
+    inc--
+    
+}
+    
+    return board;
+}
+
+export function findMatchesAfterRefill(board:any):any{
+
 }
